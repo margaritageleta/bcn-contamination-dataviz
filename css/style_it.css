@@ -1,0 +1,20 @@
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+#map {
+	height: 200px;
+}
+
+.info_header {
+	color: green;
+	font-family: Arial;
+	font-size: 20px;
+}
+
+.info_paragraph {
+	color: black;
+	font-family: Arial;
+	font-size: 14px;
+}

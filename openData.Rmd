@@ -1,0 +1,324 @@
+---
+title: "Open Data Barcelona"
+author: "Rita"
+output: html_notebook
+---
+### Pla Clima
+
+El canvi climàtic és una realitat i està ocasionat per l’ésser humà. Ja tenim evidències dels seus impactes i cal actuar per a fer-hi front.  
+
+Les ciutats són especialment vulnerables, ja que concentren la majoria de la població mundial i és on l’energia es consumeix de manera més intensiva, generant el 70% de les emissions de gasos amb efecte d’hivernacle.
+
+Barcelona és una ciutat mediterrània, que consumeix poca energia i genera poques emissions per càpita en relació a altres ciutats similars, però encara té molt camí per recórrer, ja que té una elevada dependència de recursos fòssils i nuclears.
+
+Els efectes del canvi climàtic podrien presentar riscos en termes de salut i benestar de les persones (onades de calor), de seguretat (garantia de subministrament d’aigua i d’energia, vulnerabilitat de les infraestructures, risc d’incendis..) i en l’entorn natural que cal preveure i prevenir a nivell global.
+
+Amb motiu de la celebració a París de la COP21, la 21a Conferència de les Parts de la Convenció Marc de les Nacions Unides sobre el Canvi Climàtic, i en el marc del Compromís Ciutadà per la Sostenibilitat, Barcelona va concretar un Compromís de Barcelona pel Clima, en què es comprometia a reduir les emissions de gasos em efecte hivernacle un 40% al 2030 en relació al 2005 i augmentar 1,6km2 de verd urbà com a mesura d’adaptació.
+
+Ajuntament i ciutadania van establir un Full de Ruta 2015-2017 amb projectes municipals i ciutadans per aconseguir aquests objectius. A partir de l’experiència d’aquests dos anys l’Ajuntament vol donar una resposta més potent i estructurada a aquest compromís i per això es proposa aglutinar les accions que du a terme al voltant del repte del canvi climàtic en un únic pla que integri totes les línies de treball: el Pla Clima.
+
+És un pla que alhora concreta els compromisos internacionals signats per l’Ajuntament, com és el Pacte d’Alcaldes i Alcaldesses pel Clima i l’Energia Sostenible.
+
+## Qualitat de l'aire de la ciutat de Barcelona
+Es mostren dades dels contaminants mesurats a les estacions de la ciutat de Barcelona.
+L'actualització es realitza en intervals d'una hora indicant si el valor està o no validat i també es mostren les dades dels tres dies anteriors a l'actual. Tanmateix es publiquen històrics amb periodicitat mensual.
+
+```{r}
+library(data.table) 
+library(dplyr)
+library(lubridate)
+```
+
+```{r}
+gener <- tbl_df(fread("data/2019_01_Gener_qualitat_aire_BCN.csv",
+               header=TRUE))
+names(gener)
+```
+
+```{r}
+gener2 <- gener %>%
+  mutate(sector = as.factor(str_extract(nom_cabina, "(?<=[-]\\D).*")),
+         qualitat_aire = as.factor(qualitat_aire),
+         qualitat_o3 = as.factor(qualitat_o3),
+         valor_o3 = as.numeric(str_extract(valor_o3, "^[[:digit:]]")),
+         qualitat_no2 = as.factor(qualitat_no2),
+         valor_no2 = as.numeric(str_extract(valor_no2, "^[[:digit:]]")),
+         qualitat_pm10 = as.factor(qualitat_pm10),
+         valor_pm10 = as.numeric(str_extract(valor_pm10, "^[[:digit:]]")),
+         generat = dmy_hm(generat)
+         ) %>%
+  select(sector, qualitat_aire, qualitat_o3, valor_o3, qualitat_no2, valor_no2, qualitat_pm10,
+         valor_pm10, generat)
+summary(gener2)
+```
+
+```{r}
+gener2 %>% 
+  filter(sector == "Palau Reial") %>% 
+  select(valor_no2, generat) %>%
+  ggplot(aes(x = generat, y = valor_no2)) +
+  geom_line()
+
+```
+
+```{r}
+gener2 %>% 
+  filter(sector == "Palau Reial", generat >= as.Date("2019-01-15"), generat <= as.Date("2019-01-16")) %>% 
+  select(valor_no2, generat) %>%
+  ggplot(aes(x = generat, y = valor_no2)) +
+  geom_line() + geom_point()
+  
+
+```
+
+
+```{r}
+gener3 <- gener %>% 
+  mutate(sector = as.factor(str_extract(nom_cabina, "(?<=[-]\\D).*")),
+         qualitat_aire = as.factor(qualitat_aire),
+         qualitat_o3 = as.factor(qualitat_o3),
+         valor_o3 = as.numeric(str_extract(valor_o3, "^[[:digit:]]")),
+         qualitat_no2 = as.factor(qualitat_no2),
+         valor_no2 = as.numeric(str_extract(valor_no2, "^[[:digit:]]")),
+         qualitat_pm10 = as.factor(qualitat_pm10),
+         valor_pm10 = as.numeric(str_extract(valor_pm10, "^[[:digit:]]")),
+         date = str_extract(generat, ".*[[:space:]]"),
+         hour = str_extract(generat, "(?<=[[:space:]])[0-9.]+")) %>%
+  separate(col = date, into = c("day", "month", "year"), sep = "/") %>%
+  mutate(day = as.integer(day),
+         month = as.integer(month),
+         year = as.integer(year),
+         hour = as.integer(hour)) %>%
+  select(sector, qualitat_aire, qualitat_o3, valor_o3, qualitat_no2, valor_no2, qualitat_pm10,
+         valor_pm10, day, month, year, hour)
+summary(gener3)
+```
+
+BV: µg/m³ medio de contaminadores por horas en enero en 8 barrios de Barcelona.
+```{r}
+gener3 %>% 
+  gather(measure, measure_value, valor_o3, valor_no2, valor_pm10) %>%
+  filter(year == 2019, month == 1) %>%
+  select(day, hour, measure, measure_value, sector) %>%
+  group_by(hour, measure, sector) %>%
+  summarise(mean_val_hour = mean(measure_value, na.rm = TRUE)) %>%
+  ggplot(aes(hour, mean_val_hour, color = measure)) +
+  labs(title = "µg/m³ medio de contaminadores",
+       x = "Hora", 
+       y = "µg/m³ medio",
+       color = "Contaminador",
+       caption = "Datos de opendata-ajuntament.barcelona.cat") +
+  scale_color_discrete(labels = c("NO2", "O3", "PM10")) +
+  geom_line() +
+  #geom_point() + 
+  facet_wrap(~ sector, nrow = 2) +
+  theme_minimal()
+```
+
+The study suggested that for 2015, the total existing UK vegetation reduces the average annual surface concentration by about 10% for PM2.5, 6% for PM10, 13% for O3, 24% for NH3 and 30% for SO2, but did not markedly change NO2 concentrations.
+https://airqualitynews.com/2018/07/30/plants-and-trees-not-the-solution-to-air-pollution-in-cities/
+
+Cleaning dataset function:
+```{r}
+clean_bcn_data <- function(data) {
+  data <- data %>% 
+  mutate(sector = as.factor(str_extract(nom_cabina, "(?<=[-]\\D).*")),
+         qualitat_aire = as.factor(qualitat_aire),
+         qualitat_o3 = as.factor(qualitat_o3),
+         valor_o3 = as.numeric(str_extract(valor_o3, "^[[:digit:]]")),
+         qualitat_no2 = as.factor(qualitat_no2),
+         valor_no2 = as.numeric(str_extract(valor_no2, "^[[:digit:]]")),
+         qualitat_pm10 = as.factor(qualitat_pm10),
+         valor_pm10 = as.numeric(str_extract(valor_pm10, "^[[:digit:]]")),
+         date = str_extract(generat, ".*[[:space:]]"),
+         hour = str_extract(generat, "(?<=[[:space:]])[0-9.]+")) %>%
+  separate(col = date, into = c("day", "month", "year"), sep = "/") %>%
+  mutate(day = as.integer(day),
+         month = as.integer(month),
+         year = as.integer(year),
+         hour = as.integer(hour),
+         month = case_when(month == 1 ~ as.integer(13), TRUE ~ as.integer(month))) %>%
+  select(sector, qualitat_aire, qualitat_o3, valor_o3, qualitat_no2, valor_no2, qualitat_pm10,
+         valor_pm10, day, month, year, hour)
+  data
+}
+```
+
+Aggregate data:
+```{r}
+data_06_2018 <- tbl_df(fread("data/2018_06_Juny_qualitat_aire_BCN.csv", header=TRUE))
+data_07_2018 <- tbl_df(fread("data/2018_07_Juliol_qualitat_aire_BCN.csv", header=TRUE))
+data_08_2018 <- tbl_df(fread("data/2018_08_Agost_qualitat_aire_BCN.csv", header=TRUE))
+data_09_2018 <- tbl_df(fread("data/2018_09_Setembre_qualitat_aire_BCN.csv", header=TRUE))
+data_10_2018 <- tbl_df(fread("data/2018_10_Octubre_qualitat_aire_BCN.csv", header=TRUE))
+data_11_2018 <- tbl_df(fread("data/2018_12_Desembre_qualitat_aire_BCN.csv", header=TRUE))
+data_12_2018 <- tbl_df(fread("data/2018_11_novembre_qualitat_aire_BCN.csv", header=TRUE))
+data_01_2019 <- tbl_df(fread("data/2019_01_Gener_qualitat_aire_BCN.csv", header=TRUE))
+data <- rbind(data_06_2018,
+              data_07_2018,
+              data_08_2018,
+              data_09_2018,
+              data_10_2018,
+              data_11_2018,
+              data_12_2018,
+              data_01_2019) %>% clean_bcn_data() 
+summary(data)
+```
+
+```{r}
+plotit <- data %>% 
+  gather(measure, measure_value, valor_o3, valor_no2, valor_pm10) %>%
+  filter(year >= 2018, month >= 6, sector %in% c("Eixample", "Palau Reial", "Vall Hebron")) %>%
+  select(month, day, hour, measure, measure_value, sector) %>%
+  group_by(month, hour, measure, sector) %>%
+  summarise(mean_val_hour = mean(measure_value, na.rm = TRUE)) %>%
+  ggplot(aes(hour, mean_val_hour, color = measure)) +
+  labs(title = "µg/m³ medio de contaminadores",
+       x = "Hora", 
+       y = "µg/m³ medio",
+       color = "Contaminador",
+       caption = "Datos de opendata-ajuntament.barcelona.cat") +
+  scale_color_discrete(labels = c("NO2", "O3", "PM10")) +
+  geom_line() +
+  geom_point() + 
+  facet_grid(sector ~ month) +
+  theme_minimal()
+```
+
+```{r}
+data %>% 
+  gather(measure, measure_value, valor_o3, valor_no2, valor_pm10) %>%
+  filter(year >= 2018, month >= 6, sector %in% c("Eixample", "Palau Reial", "Vall Hebron")) %>%
+  select(month, day, hour, measure, measure_value, sector) %>%
+  group_by(month, measure, sector) %>%
+  summarise(mean_val_month = mean(measure_value, na.rm = TRUE)) %>%
+  ggplot(aes(month, mean_val_month, color = measure)) +
+  labs(title = "µg/m³ medio de contaminadores",
+       x = "Mes", 
+       y = "µg/m³ medio",
+       color = "Contaminador",
+       caption = "Datos de opendata-ajuntament.barcelona.cat") +
+  scale_color_discrete(labels = c("NO2", "O3", "PM10")) +
+  geom_line() +
+  geom_point() + 
+  facet_wrap(~ sector, nrow = 4) +
+  theme_minimal()
+```
+
+```{r}
+plotit <- data %>% 
+  gather(measure, measure_value, valor_o3, valor_no2, valor_pm10) %>%
+  filter(year >= 2018, month >= 6, sector %in% c("Eixample", "Palau Reial", "Vall Hebron")) %>%
+  select(month, day, hour, measure, measure_value, sector) %>%
+  group_by(month, sector) %>%
+  summarise(mean_val_month = mean(measure_value, na.rm = TRUE)) %>%
+  ggplot(aes(month, mean_val_month)) +
+  labs(title = "µg/m³ medio de contaminadores",
+       x = "Mes", 
+       y = "µg/m³ medio",
+       caption = "Datos de opendata-ajuntament.barcelona.cat") +
+  geom_line() +
+  geom_point() + 
+  facet_wrap(~ sector, nrow = 4) +
+  theme_minimal()
+```
+
+```{r}
+library(plotly)
+library(htmlwidgets)
+saveWidget(ggplotly(plotit, dynamicTicks = FALSE), file = "meancont.html");
+```
+
+### Accidents
+```{r}
+accidents <- tbl_df(fread("2018_accidents_causes_gu_bcn.csv", header=TRUE))
+accidents <- accidents %>% 
+  select("Nom_districte", "Any", "Mes_any","Dia_mes", "Hora_dia", "Descripcio_causa_mediata") %>%
+  mutate(sector = as.factor(Nom_districte),
+         any = Any,
+         mes = Mes_any,
+         dia = Dia_mes, 
+         hora = Hora_dia) %>%
+  select(sector, any, mes, dia, hora)
+levels(accidents$sector)
+levels(data$sector)
+```
+
+```{r}
+accidents %>%
+  filter(sector %in% c("Eixample", "Gràcia"), any == 2018, mes >= 6) %>%
+  group_by(sector, mes, hora) %>%
+  summarise(n_acc = n()) %>%
+  ggplot(aes(hora, n_acc)) +
+  labs(title = "Número de accidentes",
+       x = "Hora", 
+       y = "Accidentes",
+       caption = "Datos de opendata-ajuntament.barcelona.cat") +
+  geom_line() +
+  geom_point() + 
+  facet_grid(sector ~ mes) +
+  theme_minimal()
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Mortalitat
+```{r}
+mortalitat <- tbl_df(fread("2018_taxa_mortalitat.csv", header=TRUE))
+mortalitat %>%
+  select(Nom_districte, Nom_barri, Nombre) %>%
+  group_by(Nom_districte) %>%
+  summarise(mean_n = mean(Nombre)) %>%
+  ggplot() +
+  geom_bar(aes(x = Nom_districte, y = mean_n),stat = "identity")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

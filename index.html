@@ -11,17 +11,68 @@
 
 </head>
 <body>
-	<div id="map"></div>
-	<iframe src="meancont.html"
-        height="600" width="100%"
-        scrolling="no" seamless="seamless"
-        frameBorder="0"></iframe>
+	<div id="map" class="addborder"></div>
+	<!--<iframe src="meancont.html" height="600" width="100%" scrolling="no" seamless="seamless" frameBorder="0"></iframe>-->
+	<nav>
+		<button class="button noSelect">info pollution</button>
+		<button class="button">dataviz</button>
+	</nav>
+	<div id="sheets">
+		<div id="about">
+			<div class="description">
+				<p>
+					The world gets hotter and more crowded, our engines continue to pump out dirty emissions: the air we breathe is becoming polluted. <b>Air pollution</b> has serious effects on health and it generally lowers our <i>quality of life</i> and <i>life expectancy</i>.
+					<br><br>
+					<b>Climate change</b> is closely linked to air pollution. How? The main driver of climate change is fossil fuel combustion which is, at the same time, a major contributor to air pollution. Taking measures on one, can help to mitigate the other.
+				</p>
+			</div>
+			<div class="list-container">
+				<div style="background-color: #ffebeb; border-radius: 7px;" class="addborder">
+					<img class="image" src="img/no2.png">
+					<span><b>Nitrogen dioxide</b></span>
+					<span>(NO2)</span>
+					<div id="no2" class="mini-description">
+						<p> 
+							The major sources of NO2 emissions are combustion processes (heating, power generation, and fuel combustion in engines in vehicles).
+						</p>
+					</div>
+				</div>
+				<div style="background-color: #f0f7d9; border-radius: 7px;" class="addborder">
+					<img class="image" src="img/o3.png">
+					<span><b>Ozone</b></span>
+					<span>(O3)</span>
+					<div id="ozone" class="mini-description">
+						<p>
+							Is one of the main compounds of the photochemical smog. It is formed by a reaction: <b>sunlight + nitrogen oxide</b> (like NO2). Thus, the highest levels of O3 pollution occur during periods of sunny weather.
+						</p>
+					</div>
+				</div>
+				<div style="background-color: #e0f5ff; border-radius: 7px;" class="addborder">
+					<img class="image" src="img/pm10.png">
+					<span><b>Particulate Matter</b></span>
+					<span>(PM10)</span>
+					<div id="pm10" class="mini-description">
+						<p>
+							A mix of small particles of dust, ashes, cement and soot coming from fuel combustion and road traffic.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--<iframe src="meancont.html" height="600" width="100%" scrolling="no" seamless="seamless" frameBorder="0"></iframe>-->
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/leaflet.js"></script>
 	<script src="js/barris.js"></script>
 	<script src="js/motor.js"></script>
+	<script type="text/javascript">
+		// https://ajuntament.barcelona.cat/qualitataire/en
+		// https://www.who.int/air-pollution/news-and-events/how-air-pollution-is-destroying-our-health
+	</script>
 </body>
 </html>
+
 
 
 

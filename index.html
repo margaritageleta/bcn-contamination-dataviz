@@ -7,18 +7,18 @@
 	<link href="css/leaflet.css" type="text/css" rel=stylesheet>
 	<!--<link rel="stylesheet" media="all" href="css/style_it.css" type="text/css">-->
 	<link href="css/style_it.css" type="text/css" rel=stylesheet>
- 	
+ 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 
 </head>
 <body>
 	<div id="map" class="addborder"></div>
 	<!--<iframe src="meancont.html" height="600" width="100%" scrolling="no" seamless="seamless" frameBorder="0"></iframe>-->
 	<nav>
-		<button class="button noSelect">info pollution</button>
-		<button class="button">dataviz</button>
+		<button id="info" class="button">about pollution</button>
+		<button id="dataviz" class="button">data viz pollution by hour</button>
 	</nav>
 	<div id="sheets">
-		<div id="about">
+		<div id="about" class="disabled">
 			<div class="description">
 				<p>
 					The world gets hotter and more crowded, our engines continue to pump out dirty emissions: the air we breathe is becoming polluted. <b>Air pollution</b> has serious effects on health and it generally lowers our <i>quality of life</i> and <i>life expectancy</i>.
@@ -59,8 +59,29 @@
 				</div>
 			</div>
 		</div>
+		<div id="stats" class="disabled">
+			<div id="range-wrapper" class="addborder">
+				<div class="range">
+  					<input type="range" min="1" max="8" steps="1" value="1">
+				</div>
+				<ul class="range-labels">
+  					<li class="active selected">Jun 2018</li>
+  					<li>Jul 2018</li>
+  					<li>Aug 2018</li>
+  					<li>Sep 2018</li>
+  					<li>Oct 2018</li>
+  					<li>Nov 2018</li>
+  					<li>Dec 2018</li>
+  					<li>Jan 2019</li>
+				</ul>
+			</div>
+
+			
+			
+
+		</div>
 	</div>
-	<!--<iframe src="meancont.html" height="600" width="100%" scrolling="no" seamless="seamless" frameBorder="0"></iframe>-->
+	
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/leaflet.js"></script>

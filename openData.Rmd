@@ -32,7 +32,7 @@ library(lubridate)
 ```{r}
 gener <- tbl_df(fread("data/2019_01_Gener_qualitat_aire_BCN.csv",
                header=TRUE))
-names(gener)
+gener %>% select(nom_cabina, longitud, latitud) %>% distinct()
 ```
 
 ```{r}
@@ -151,8 +151,8 @@ data_07_2018 <- tbl_df(fread("data/2018_07_Juliol_qualitat_aire_BCN.csv", header
 data_08_2018 <- tbl_df(fread("data/2018_08_Agost_qualitat_aire_BCN.csv", header=TRUE))
 data_09_2018 <- tbl_df(fread("data/2018_09_Setembre_qualitat_aire_BCN.csv", header=TRUE))
 data_10_2018 <- tbl_df(fread("data/2018_10_Octubre_qualitat_aire_BCN.csv", header=TRUE))
-data_11_2018 <- tbl_df(fread("data/2018_12_Desembre_qualitat_aire_BCN.csv", header=TRUE))
-data_12_2018 <- tbl_df(fread("data/2018_11_novembre_qualitat_aire_BCN.csv", header=TRUE))
+data_12_2018 <- tbl_df(fread("data/2018_12_Desembre_qualitat_aire_BCN.csv", header=TRUE))
+data_11_2018 <- tbl_df(fread("data/2018_11_novembre_qualitat_aire_BCN.csv", header=TRUE))
 data_01_2019 <- tbl_df(fread("data/2019_01_Gener_qualitat_aire_BCN.csv", header=TRUE))
 data <- rbind(data_06_2018,
               data_07_2018,
@@ -229,44 +229,68 @@ library(htmlwidgets)
 saveWidget(ggplotly(plotit, dynamicTicks = FALSE), file = "meancont.html");
 ```
 
-### Accidents
+### Just clean
 ```{r}
-accidents <- tbl_df(fread("2018_accidents_causes_gu_bcn.csv", header=TRUE))
-accidents <- accidents %>% 
-  select("Nom_districte", "Any", "Mes_any","Dia_mes", "Hora_dia", "Descripcio_causa_mediata") %>%
-  mutate(sector = as.factor(Nom_districte),
-         any = Any,
-         mes = Mes_any,
-         dia = Dia_mes, 
-         hora = Hora_dia) %>%
-  select(sector, any, mes, dia, hora)
-levels(accidents$sector)
-levels(data$sector)
+clean_data <- function(data) {
+  data <- data %>% 
+  mutate(sector = as.factor(str_extract(nom_cabina, "(?<=[-]\\D).*")),
+         qualitat_aire = as.factor(qualitat_aire),
+         qualitat_o3 = as.factor(qualitat_o3),
+         valor_o3 = as.numeric(str_extract(valor_o3, "^[[:digit:]]")),
+         qualitat_no2 = as.factor(qualitat_no2),
+         valor_no2 = as.numeric(str_extract(valor_no2, "^[[:digit:]]")),
+         qualitat_pm10 = as.factor(qualitat_pm10),
+         valor_pm10 = as.numeric(str_extract(valor_pm10, "^[[:digit:]]")),
+         date = str_extract(generat, ".*[[:space:]]"),
+         hour = str_extract(generat, "(?<=[[:space:]])[0-9.]+")) %>%
+  separate(col = date, into = c("day", "month", "year"), sep = "/") %>%
+  mutate(day = as.integer(day),
+         month = as.integer(month),
+         year = as.integer(year),
+         hour = as.integer(hour),
+         month = as.integer(month)) %>%
+  select(sector, qualitat_aire, qualitat_o3, valor_o3, qualitat_no2, valor_no2, qualitat_pm10,
+         valor_pm10, day, month, year, hour)
+  data
+}
 ```
 
 ```{r}
-accidents %>%
-  filter(sector %in% c("Eixample", "Gràcia"), any == 2018, mes >= 6) %>%
-  group_by(sector, mes, hora) %>%
-  summarise(n_acc = n()) %>%
-  ggplot(aes(hora, n_acc)) +
-  labs(title = "Número de accidentes",
-       x = "Hora", 
-       y = "Accidentes",
-       caption = "Datos de opendata-ajuntament.barcelona.cat") +
+(p <- data_06_2018 %>% clean_data() %>%
+  gather(measure, measure_value, valor_o3, valor_no2, valor_pm10) %>%
+  filter(year == 2018, month == 6) %>%
+  select(day, hour, measure, measure_value, sector) %>%
+   mutate(measure = case_when(measure == "valor_no2" ~ "NO2",
+                              measure == "valor_o3" ~ "O3",
+                              measure == "valor_pm10" ~ "PM10",
+                              TRUE ~ measure)) %>%
+  group_by(hour, measure, sector) %>%
+  summarise(mean_val_hour = mean(measure_value, na.rm = TRUE)) %>%
+   
+   
+   
+  ggplot(aes(hour, mean_val_hour, color = measure)) +
+  labs(title = "Mean value of pollutants by hour in June 2018",
+       x = "Hour", 
+       y = "µg/m³",
+       color = "Pollutant",
+       caption = "Data from opendata-ajuntament.barcelona.cat") +
+  #scale_color_discrete(labels = c("NO2", "O3", "PM10")) +
   geom_line() +
   geom_point() + 
-  facet_grid(sector ~ mes) +
-  theme_minimal()
-  
+  facet_wrap(~ sector, nrow = 2) +
+  theme_mine()
+  )
 ```
 
+```{r}
+saveWidget(ggplotly(p, dynamicTicks = TRUE), file = "meanjun.html")
+```
 
+```{r}
+ggplotly(p) 
 
-
-
-
-
+```
 
 
 
@@ -295,20 +319,76 @@ mortalitat %>%
 ```
 
 
+```{r}
+theme_mine <- function () { 
+    theme_bw(base_size=12, base_family="Montserrat") %+replace% 
+        theme(
+            panel.background  = element_blank(),
+            plot.background = element_rect(fill="#ebfff5", colour=NA), 
+            legend.background = element_rect(fill="transparent", colour=NA),
+            legend.key = element_rect(fill="transparent", colour=NA)
+        )
+}
+```
 
 
+```{r}
+data_06_2019 <- tbl_df(fread("data/2019_06_juny_qualitat_aire_BCN.csv", header=TRUE))
+summary(data_06_2019)
+```
 
 
+```{r}
+length(names(data_06_2019))
+(i <- data_06_2019 %>%
+  select(5:57) %>%
+  mutate(measure = as.factor(case_when(CODI_CONTAMINANT == 1 ~ "SO2",
+                              CODI_CONTAMINANT == 7 ~ "NO",
+                              CODI_CONTAMINANT == 8 ~ "NO2",
+                              CODI_CONTAMINANT == 12 ~ "NOx",
+                              CODI_CONTAMINANT == 14 ~ "O3",
+                              CODI_CONTAMINANT == 6 ~ "CO",
+                              CODI_CONTAMINANT == 10 ~ "PM10",
+                              TRUE ~ ""))) %>%
+  mutate(sector = as.factor(case_when(ESTACIO == 4 ~ "Poblenou",
+                              ESTACIO == 42 ~ "Sants",
+                              ESTACIO == 43 ~ "Eixample",
+                              ESTACIO == 44 ~ "Gràcia",
+                              ESTACIO == 50 ~ "Ciutadella",
+                              ESTACIO == 54 ~ "Vall Hebron",
+                              ESTACIO == 57 ~ "Palau Reial",
+                              TRUE ~ ""))) %>%
+  gather(hour, measure_value, starts_with("H")) %>%
+  gather(validation, val, starts_with("V")) %>% distinct() %>%
+  mutate(day = as.integer(DIA),
+         month = as.integer(MES),
+         year = as.integer(ANY),
+         hour = as.integer(str_extract(hour,"..$"))) %>%
+  select(sector, year, month, day, hour, measure, measure_value) %>%
+  #filter(sector == "Ciutadella") %>%
+  group_by(hour, measure, sector) %>%
+  summarise(mean_val_hour = mean(measure_value, na.rm = TRUE)) %>%
+   
+  ggplot(aes(hour, mean_val_hour, color = measure)) +
+  labs(title = "Mean value of pollutants by hour in June 2019",
+       x = "Hour", 
+       y = "µg/m³",
+       color = "Pollutant",
+       caption = "Data from opendata-ajuntament.barcelona.cat") +
+  #scale_color_discrete(labels = c("NO2", "O3", "PM10")) +
+  geom_line(size=1) +
+  geom_hline(yintercept = 90, linetype = 2) +
+  geom_text(aes(0,90,label = "Limit of NO2 ok", vjust = -1)) +
+  #geom_point() + 
+  facet_wrap(~ sector, nrow = 1) +
+  theme_mine())
 
+  
+```
 
-
-
-
-
-
-
-
-
+```{r}
+ggplotly(i) 
+```
 
 
 

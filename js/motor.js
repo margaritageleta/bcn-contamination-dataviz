@@ -231,6 +231,18 @@ $rangeInput.on('input', function () {
   	$(".meanclass").remove();
 	$("#stats").append("<iframe id=\"meanjan\" src=\"widgets/meanjan.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
   }
+  else if($(this).val() == 9) {
+    // Jan 2019
+    console.log("apr 2019");
+    $(".meanclass").remove();
+  $("#stats").append("<iframe id=\"meanapr19\" src=\"widgets/meanapr19.html\" height=\"500\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+  }
+  else if($(this).val() == 10) {
+    // Jan 2019
+    console.log("jun 2019");
+    $(".meanclass").remove();
+  $("#stats").append("<iframe id=\"meanjun19\" src=\"widgets/meanjun19.html\" height=\"500\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+  }
 });
 });
 

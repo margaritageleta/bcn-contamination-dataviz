@@ -24,6 +24,7 @@ Es mostren dades dels contaminants mesurats a les estacions de la ciutat de Barc
 L'actualització es realitza en intervals d'una hora indicant si el valor està o no validat i també es mostren les dades dels tres dies anteriors a l'actual. Tanmateix es publiquen històrics amb periodicitat mensual.
 
 ```{r}
+library(tidyverse)
 library(data.table) 
 library(dplyr)
 library(lubridate)
@@ -137,6 +138,7 @@ clean_bcn_data <- function(data) {
          month = as.integer(month),
          year = as.integer(year),
          hour = as.integer(hour),
+         sector = case_when(sector == "Ciutadella" ~ factor("Ciutat Vella"), TRUE ~ factor(sector)),
          month = case_when(month == 1 ~ as.integer(13), TRUE ~ as.integer(month))) %>%
   select(sector, qualitat_aire, qualitat_o3, valor_o3, qualitat_no2, valor_no2, qualitat_pm10,
          valor_pm10, day, month, year, hour)

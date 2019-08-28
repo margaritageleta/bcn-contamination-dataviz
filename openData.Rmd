@@ -368,7 +368,7 @@ length(names(data_06_2019))
   #filter(sector == "Ciutadella") %>%
   group_by(hour, measure, sector) %>%
   summarise(mean_val_hour = mean(measure_value, na.rm = TRUE)) %>%
-   
+    
   ggplot(aes(hour, mean_val_hour, color = measure)) +
   labs(title = "Mean value of pollutants by hour in June 2019",
        x = "Hour", 
@@ -376,10 +376,14 @@ length(names(data_06_2019))
        color = "Pollutant",
        caption = "Data from opendata-ajuntament.barcelona.cat") +
   #scale_color_discrete(labels = c("NO2", "O3", "PM10")) +
+  scale_color_manual(values = c("purple", "yellow", "red", "orange", "green", "blue", "pink")) +
   geom_line(size=1) +
-  geom_hline(yintercept = 90, linetype = 2) +
-  geom_text(aes(0,90,label = "Limit of NO2 ok", vjust = -1)) +
+  geom_hline(yintercept = 90, linetype = 2, color = "red") +
+  geom_hline(yintercept = 110, linetype = 2, color = "green") +
+  #geom_hline(yintercept = 200, linetype = 2, color = "pink") +
+  #geom_text(aes(0,90,label = "Limit NO2 by h", vjust = -1), color = "black") +
   #geom_point() + 
+  scale_x_continuous(limits = c(0, 22)) + 
   facet_wrap(~ sector, nrow = 1) +
   theme_mine())
 

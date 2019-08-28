@@ -1,20 +1,306 @@
-html, body {
+/*html, body {
 	height: 100%;
 	width: 100%;
+}*/
+.addborder {
+
+	border-style: solid;
+	border-width: 2.5px;
+	border-color: white;
 }
 
+html, body {
+	background-color: #ebfff5;
+}
+
+/* MAP STUFF*/
 #map {
-	height: 200px;
+	height: 400px;
+	width: 99.5%;
+	border-radius: 7px;
 }
 
 .info_header {
 	color: green;
-	font-family: Arial;
+	font-family: Montserrat;
 	font-size: 20px;
 }
 
 .info_paragraph {
 	color: black;
-	font-family: Arial;
+	font-family: Montserrat;
 	font-size: 14px;
 }
+
+/* NAV STUFF */
+.button {
+	transition-duration: 0.4s;
+  	display: inline-block;
+  	padding: 7px 10px;
+  	font-size: 22px;
+  	font-family: Montserrat;
+  	font-weight: bold;
+	font-variant: small-caps;
+  	cursor: pointer;
+  	text-align: center;
+  	color: #fff;
+  	border: none;
+  	border-radius: 7px;
+  	background-color: #66e6cc;
+  	box-shadow: 0 9px #33cccc;
+}
+button:focus {
+    outline: none !important;
+}
+nav {
+	background-color: none;
+	margin-top: 9px;
+	margin-bottom: 18px;
+}
+.button:hover { transition-duration: 0.4s; }
+.button:active { 
+	box-shadow: 0 5px #33cccc;
+	transform: translateY(4px); 
+}
+
+/* DESCRIPTION STUFF */
+.description { 
+	background-color: none 
+}
+.description p{
+	padding: 8px;
+	font-family: Montserrat;
+	font-size: 18px;
+	text-align: justify;
+	background-clip: padding-box; /*Add color to padding*/
+	color: #009191;
+}
+
+
+.list-container { 
+	display: grid;
+	background-color: none; 
+	grid-template-columns: 1fr 1fr 1fr;
+
+	
+}
+.list-container > div {
+	margin: 6px;
+}
+
+.list-container > div > div {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+.list-container span {
+	padding-left: 8px;
+	padding-right: 8px;
+	font-family: Montserrat;
+	text-align: center;
+	color: #009191;
+}
+
+.image {
+
+	height: 100px;
+	width: auto;
+	display:block;
+    margin: auto;
+    padding: 10px;
+}
+#no2 { 
+	background-color: none; 
+}
+#no2 p { color: #c74040; }
+
+#ozone { 
+	background-color: none; 
+}
+#ozone p {
+	color: green;
+}
+#pm10 { 
+	background-color: none; 
+}
+#pm10 p { color: #5c70c2; }
+
+.mini-description {
+	display: flex;
+	justify-content: center;
+}
+.mini-description p{
+	padding-left: 8px;
+	padding-right: 8px;
+	font-family: Montserrat;
+	text-align: justify;
+	background-clip: padding-box; /*Add color to padding*/
+}
+
+/*NEXT STEPS: functionality*/
+
+.disabled {
+    pointer-events: none;
+    opacity: 0;
+}
+.disabled * {
+	position: absolute;
+}
+
+
+.enabled {
+    pointer-events: auto;
+    opacity: 1;
+}
+.enabled * {
+    position: relative;
+}
+
+
+/*////////////////////////*/
+#range-wrapper {
+	background-color: #66e6cc;
+	border-radius: 7px;
+	margin: 10px;
+	/*padding: 20px;*/
+	padding-left: 35px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.range {
+  position: relative;
+  width: 632px;
+  height: 5px;
+}
+
+.range input {
+  width: 100%;
+  position: absolute;
+  top: 2px;
+  height: 0;
+  -webkit-appearance: none;
+}
+.range input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; /*slider appearance*/
+  height: 18px;
+  margin: -8px 0 0;
+  border-radius: 0%;
+  background: #009191;
+  cursor: pointer;
+  border: 0 !important;
+}
+.range input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  margin: -8px 0 0;
+  border-radius: 0%;
+  background: #009191;
+  cursor: pointer;
+  border: 0 !important;
+}
+.range input::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  margin: -8px 0 0;
+  border-radius: 0%;
+  background: #009191;
+  cursor: pointer;
+  border: 0 !important;
+}
+.range input::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: white;
+}
+.range input::-moz-range-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: white;
+}
+.range input::-ms-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: white;
+}
+.range input:focus {
+  background: none;
+  outline: none;
+}
+.range input::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+.range-labels {
+  margin: 17px -41px 0;
+  padding: 0;
+  list-style: none;
+}
+.range-labels li {
+  position: relative;
+  float: left;
+  width: 90.25px;
+  text-align: center;
+  font-weight: bold;
+  font-family: Montserrat;
+  color: white; /* labels grey */
+  font-size: 14px;
+  cursor: pointer;
+}
+.range-labels li::before {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  left: 0;
+  content: "";
+  margin: 0 auto;
+  width: 3px; /*small points*/
+  height: 15px;
+  background: white; /*points before arriving*/
+  border-radius: 0%;
+}
+.range-labels .active {
+  color: #009191;
+}
+.range-labels .selected::before {
+  background: #b2b2b2;
+}
+.range-labels .active.selected::before {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

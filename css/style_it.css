@@ -6,11 +6,25 @@
 
 	border-style: solid;
 	border-width: 2.5px;
-	border-color: white;
+	border-color: turquoise;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  padding-bottom: 20px;
+
+  background-color: azure;
+  border-top: 2px solid turquoise;
+  border-bottom: 2px solid turquoise;
+  width: 98%;
+}
+
+
 html, body {
-	background-color: #ebfff5;
+	background-color: honeydew;
 }
 
 /* MAP STUFF*/
@@ -34,9 +48,11 @@ html, body {
 
 /* NAV STUFF */
 .button {
+  margin-right: 10px;
+  margin-right: 10px;
 	transition-duration: 0.4s;
   	display: inline-block;
-  	padding: 7px 10px;
+  	padding: 10px;
   	font-size: 22px;
   	font-family: Montserrat;
   	font-weight: bold;

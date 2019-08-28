@@ -16,6 +16,7 @@
 	<nav>
 		<button id="info" class="button">about pollution</button>
 		<button id="dataviz" class="button">data viz pollution by hour</button>
+		<button id="dataviz2" class="button">data viz pollution by month</button>
 	</nav>
 	<div id="sheets">
 		<div id="about" class="disabled">
@@ -27,7 +28,7 @@
 				</p>
 			</div>
 			<div class="list-container">
-				<div style="background-color: #ffebeb; border-radius: 7px;" class="addborder">
+				<div style="background-color: mistyrose; border-radius: 7px;" class="addborder">
 					<img class="image" src="img/no2.png">
 					<span><b>Nitrogen dioxide</b></span>
 					<span>(NO2)</span>
@@ -47,7 +48,7 @@
 						</p>
 					</div>
 				</div>
-				<div style="background-color: #e0f5ff; border-radius: 7px;" class="addborder">
+				<div style="background-color: aliceblue; border-radius: 7px;" class="addborder">
 					<img class="image" src="img/pm10.png">
 					<span><b>Particulate Matter</b></span>
 					<span>(PM10)</span>
@@ -77,10 +78,9 @@
   					<li>Jun 2019</li>
 				</ul>
 			</div>
-
-			
-			
-
+		</div>
+		<div id="stats2" class="disabled">
+			<iframe src="widgets/meanbymonth2018.html" id="meanbymonth2018" height="600" width="100%" scrolling="no" seamless="seamless" frameborder="0"></iframe>
 		</div>
 	</div>
 	

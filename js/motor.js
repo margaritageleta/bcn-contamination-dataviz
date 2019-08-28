@@ -136,15 +136,29 @@ L.geoJson(barris, {
 $("#dataviz").click(function () {
     console.log("dataviz on");
     $("#about").removeClass("enabled");
+    $("#stats2").removeClass("enabled");
 	$("#about").addClass("disabled");
+  $("#stats2").addClass("disabled");
 	$("#stats").addClass("enabled");
  });
 
 $("#info").click(function () {
     console.log("info on");
     $("#stats").removeClass("enabled");
+    $("#stats2").removeClass("enabled");
 	$("#stats").addClass("disabled");
+  $("#stats2").addClass("disabled");
 	$("#about").addClass("enabled");
+
+ });
+
+$("#dataviz2").click(function () {
+    console.log("info on");
+    $("#stats").removeClass("enabled");
+    $("#about").removeClass("enabled");
+  $("#stats").addClass("disabled");
+  $("#about").addClass("disabled");
+  $("#stats2").addClass("enabled");
 
  });
 

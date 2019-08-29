@@ -2,6 +2,35 @@
 	height: 100%;
 	width: 100%;
 }*/
+
+#iframe-holder {
+  border: 5px solid turquoise;
+  border-radius: 15px;
+}
+
+section {
+  width: 500px;
+  height: 325px;
+  position: absolute;
+   top: 50px;
+   right: 50px;
+   bottom: 0;
+   background-color: rgba(240,255,255, 0.9);
+   border-radius: 7px;
+   border: 2px solid turquoise;
+   z-index: 1000
+}
+
+section > div {
+  font-family: Montserrat;
+  font-size: 15px;
+  margin: 15px;
+  width: 270px;
+  height: 270px;
+  background-color: none;
+  text-align: justify;
+}
+
 .addborder {
 
 	border-style: solid;
@@ -24,8 +53,16 @@ nav {
 
 
 html, body {
-	background-color: honeydew;
+	
+  background-color: honeydew;
+  overflow: visible!important;
+  max-height: 100% !important;
 }
+
+body {
+  margin: 20px;
+}
+
 
 /* MAP STUFF*/
 #map {
@@ -293,6 +330,53 @@ nav {
   display: none;
 }
 
+.opendata {
+  border-radius: 2px solid black;
+  background-color: none;
+  width: 100px;
+  height: 40px;
+  background-image: url("../img/open-data.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.bcn {
+  border-radius: 2px solid black;
+  background-color: none;
+  width: 100px;
+  height: 40px;
+  background-image: url("../img/bcn.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+ 
+.logo-container {
+  width: 470px;
+  color: #009191;
+}
+.logo-container > div {
+  width: 100%;
+  background-color: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.logo-container > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.info {
+  background-color: none;
+  width: 470px;
+  height: 195px;
+  color: #009191;
+}
 
 
 

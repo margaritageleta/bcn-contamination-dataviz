@@ -200,7 +200,7 @@ plotit <- data %>%
   group_by(month, measure, sector) %>%
   summarise(mean_val_month = mean(measure_value, na.rm = TRUE)) %>%
   ggplot(aes(month, mean_val_month)) +
-  labs(title = "Monthly average of pollutants colored by district, 2018",
+  labs(title = "Monthly average of pollutants colored by district, June 2018 - Jan 2019",
        x = "Month", 
        y = "µg/m³",
        color = "District",
@@ -496,13 +496,13 @@ summary(data19)
 ```
 
 ```{r}
-data19 %>% 
+(k <- data19 %>% 
   filter(year >= 2019, month >= 4) %>%
   group_by(month, measure, sector) %>%
   summarise(mean_val_month = mean(measure_value, na.rm = TRUE)) %>%
   #select(month, day, hour, measure, measure_value, sector) %>%
   ggplot(aes(month, mean_val_month)) +
-  labs(title = "Monthly average of pollutants colored by district",
+  labs(title = "Monthly average of pollutants colored by district, April 2019 - June 2019",
        x = "Month", 
        y = "µg/m³",
        color = "District",
@@ -513,9 +513,76 @@ data19 %>%
   #geom_point() + 
   scale_x_continuous(breaks = c(4,6)) +
   facet_wrap(~ measure, ncol = 7) +
-  theme_mine()
+  theme_mine())
 
 #method=lm for geom_smooth
+```
+
+```{r}
+ggplotly(k) 
+```
+
+```{r}
+saveWidget(ggplotly(k, dynamicTicks = TRUE), file = "mean19.html")
+```
+
+
+```{r}
+accidents18 <- tbl_df(fread("data/2018_accidents_causes_gu_bcn.csv",header=TRUE))
+summary(accidents18)
+head(accidents18)
+```
+```{r}
+(ac<- accidents18 %>% filter(Mes_any >= 6, Any == 2018) %>%
+  mutate(sector = case_when(Nom_districte == "Desconegut" ~ as.character(NA),TRUE ~ as.character(Nom_districte)),
+         sector = as.factor(sector),
+         year = Any,
+         month = Mes_any,
+         day = Dia_mes,
+         hour = Hora_dia) %>%
+   drop_na() %>%
+  select(sector, year, month, day, hour))
+levels(ac$sector)
+```
+
+```{r}
+ac %>%
+  group_by(sector, month, hour) %>%
+  summarize(incidents = n()) %>%
+  ggplot(aes(x = hour, y = incidents, color = factor(month))) +
+  geom_line() +
+  geom_smooth(se = FALSE, size = 1, color = "black") +
+  #geom_point() + 
+  facet_wrap(~ sector, ncol = 5) +
+  theme_minimal()
+  
+```
+
+
+```{r}
+ac %>%
+  group_by(sector, hour) %>%
+  summarize(incidents = n()) %>%
+  ggplot(aes(x = hour, y = incidents, color = sector)) +
+  geom_line() +
+  geom_smooth(se = FALSE, size = 1, color = "black") +
+  #geom_point() + 
+  #facet_wrap(~ sector, ncol = 5) +
+  theme_minimal()
+  
+```
+
+```{r}
+ac %>%
+  group_by(sector, month) %>%
+  summarize(incidents = n()) %>%
+  ggplot(aes(x = month, y = incidents, color = sector)) +
+  geom_line() +
+  geom_smooth(se = FALSE, size = 1, color = "black") +
+  #geom_point() + 
+  #facet_wrap(~ sector, ncol = 5) +
+  theme_minimal()
+  
 ```
 
 

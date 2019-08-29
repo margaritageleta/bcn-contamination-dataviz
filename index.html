@@ -11,8 +11,32 @@
 
 </head>
 <body>
+	<section>
+		<div>
+			<div class="info">
+				This study comprises tha analysis of the air quality of Barcelona. The source of the data analyzed is the Barcelona's City Hall Open Data Service. <br>
+				The aim of this project is to analyze the trends and tendencies of different air pollutants. An interesting pattern observed is that NO2 pollution follows the overall human activity during the day: it is low ar night and lunch time and is high at rush hours.  
+				The map shows the locations of the measuring stations.
+
+<br>
+				<br>
+				<b> By Rita Geleta</b></div>
+			<div class="logo-container">
+				<div>
+					<div><div class="bcn"></div></div>
+					<div><div class="opendata"></div></div>
+					<div><div>	
+						<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+						
+					</div></div>
+				</div>
+				<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+			</div>
+		</div>
+	</section>
 	<div id="map" class="addborder"></div>
 	<!--<iframe src="meancont.html" height="600" width="100%" scrolling="no" seamless="seamless" frameBorder="0"></iframe>-->
+
 	<nav>
 		<button id="info" class="button">about pollution</button>
 		<button id="dataviz" class="button">data viz pollution by hour</button>
@@ -78,9 +102,25 @@
   					<li>Jun 2019</li>
 				</ul>
 			</div>
+			<div id="iframe-holder"></div>
+			<div class="description">
+				<p>
+					<b>Note:</b> before 04/04/2019, the source of the data was from the <b>General Direction of Environmental Quality and Climate Change of Catalonia</b>. The measures were taken several times by hour and then the mean value of those values was given. However, after 04/04/2019, the source of the data is the <b>Public Health Agency of Barcelona (ASPB)</b>, which at each hour measures the exact value at that time. Thus, the scales are different and we cannot compare the plots from those two different data sources, yet we can observe the trends.
+					<br><br>
+					
+				</p>
+			</div>
 		</div>
 		<div id="stats2" class="disabled">
-			<iframe src="widgets/meanbymonth2018.html" id="meanbymonth2018" height="600" width="100%" scrolling="no" seamless="seamless" frameborder="0"></iframe>
+			<iframe src="widgets/meanbymonth2018.html" id="meanbymonth2018" height="400" width="100%" scrolling="no" seamless="seamless" frameborder="0"></iframe>
+			<iframe src="widgets/mean19.html" id="mean19" height="400" width="100%" scrolling="no" seamless="seamless" frameborder="0"></iframe>
+
+			<div class="description">
+				<p>
+					<b>Note:</b> before 04/04/2019, the source of the data was from the <b>General Direction of Environmental Quality and Climate Change of Catalonia</b>. The measures were taken several times by hour and then the mean value of those values was given. However, after 04/04/2019, the source of the data is the <b>Public Health Agency of Barcelona (ASPB)</b>, which at each hour measures the exact value at that time. Thus, the scales are different and we cannot compare the plots from those two different data sources, yet we can observe the trends.
+					<br><br>
+					
+				</p>
 		</div>
 	</div>
 	

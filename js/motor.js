@@ -2,7 +2,7 @@
 // JS and Leaflet stuff
 
 var map = L.map('map', {
-	center: [41.41, 2.165],
+	center: [41.41, 2.2],
 	zoom: 12,
 	minZoom: 2,
 	maxZoom: 18
@@ -22,7 +22,7 @@ var circle1 = L.circle([41.3788,2.1331], {
     fillOpacity: 0.8,
     radius: 500
 }).addTo(map);
-circle1.bindPopup("I am a circle.").openPopup();
+//circle1.bindPopup("I am a circle.").openPopup();
 
 var markereixample = L.marker([41.3853, 2.1538]).addTo(map);
 var circle2 = L.circle([41.3853, 2.1538], {
@@ -126,7 +126,7 @@ function style(feature) {
 // geojson to js
 L.geoJson(barris, {
 	// on each barri
-	onEachFeature: open_pops, // dont end with semicolon! It wont work!
+	onEachFeature: basement, // dont end with semicolon! It wont work!
 	// use comma if there are several lines, and dontt use anything if its the last.
 	style: style
 
@@ -201,61 +201,61 @@ $rangeInput.on('input', function () {
   if($(this).val() == 1) {
   	// Jun 2018
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meandec\" src=\"widgets/meanjun.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meanjun.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
  
   }
   else if($(this).val() == 2) {
   	// Jul 2018
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meandec\" src=\"widgets/meanjul.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meanjul.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
  
   }
   else if($(this).val() == 3) {
   	// Aug 2018
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meandec\" src=\"widgets/meanaug.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meanaug.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
  
   }
   else if($(this).val() == 4) {
   	// Sep 2018
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meandec\" src=\"widgets/meansep.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meansep.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
  
   }
   else if($(this).val() == 5) {
   	// Oct 2018
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meandec\" src=\"widgets/meanoct.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meanoct.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
  
   }
   else if($(this).val() == 6) {
   	// Nov 2018
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meandec\" src=\"widgets/meannov.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meannov.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
   }
   else if($(this).val() == 7) {
   	// Dec 2018
   	console.log("dec 2018");
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meandec\" src=\"widgets/meandec.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meandec.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
   }
   else if($(this).val() == 8) {
   	// Jan 2019
   	console.log("jan 2019");
   	$(".meanclass").remove();
-	$("#stats").append("<iframe id=\"meanjan\" src=\"widgets/meanjan.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+	$("#iframe-holder").append("<iframe id=\"meanjan\" src=\"widgets/meanjan.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
   }
   else if($(this).val() == 9) {
     // Jan 2019
     console.log("apr 2019");
     $(".meanclass").remove();
-  $("#stats").append("<iframe id=\"meanapr19\" src=\"widgets/meanapr19.html\" height=\"500\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+  $("#iframe-holder").append("<iframe id=\"meanapr19\" src=\"widgets/meanapr19.html\" height=\"500\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
   }
   else if($(this).val() == 10) {
     // Jan 2019
     console.log("jun 2019");
     $(".meanclass").remove();
-  $("#stats").append("<iframe id=\"meanjun19\" src=\"widgets/meanjun19.html\" height=\"500\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+  $("#iframe-holder").append("<iframe id=\"meanjun19\" src=\"widgets/meanjun19.html\" height=\"500\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
   }
 });
 });

@@ -2,7 +2,7 @@
 // JS and Leaflet stuff
 
 var map = L.map('map', {
-	center: [41.41, 2.2],
+	center: [41.41, 2.15],
 	zoom: 12,
 	minZoom: 2,
 	maxZoom: 18
@@ -138,8 +138,13 @@ $("#dataviz").click(function () {
     $("#about").removeClass("enabled");
     $("#stats2").removeClass("enabled");
 	$("#about").addClass("disabled");
+  $("#info").css('background-color', 'green');
+
   $("#stats2").addClass("disabled");
+  $("#dataviz2").css('background-color', 'green');
+
 	$("#stats").addClass("enabled");
+  $(this).css('background-color', 'red');
  });
 
 $("#info").click(function () {
@@ -147,8 +152,13 @@ $("#info").click(function () {
     $("#stats").removeClass("enabled");
     $("#stats2").removeClass("enabled");
 	$("#stats").addClass("disabled");
+  $("#dataviz").css('background-color', 'green');
+
   $("#stats2").addClass("disabled");
+  $("#dataviz2").css('background-color', 'green');
+
 	$("#about").addClass("enabled");
+  $(this).css('background-color', 'red');
 
  });
 
@@ -157,8 +167,13 @@ $("#dataviz2").click(function () {
     $("#stats").removeClass("enabled");
     $("#about").removeClass("enabled");
   $("#stats").addClass("disabled");
+  $("#dataviz").css('background-color', 'green');
+
   $("#about").addClass("disabled");
+  $("#info").css('background-color', 'green');
+
   $("#stats2").addClass("enabled");
+  $(this).css('background-color', 'red');
 
  });
 

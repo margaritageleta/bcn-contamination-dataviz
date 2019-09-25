@@ -3,10 +3,7 @@
 	width: 100%;
 }*/
 
-#iframe-holder {
-  border: 5px solid turquoise;
-  border-radius: 15px;
-}
+
 
 section {
   width: 500px;
@@ -31,9 +28,9 @@ section > div {
 
 .addborder {
 
-	border-style: solid;
+	/*border-style: solid;
 	border-width: 2.5px;
-	border-color: turquoise;
+	border-color: none;*/
 }
 
 nav {
@@ -43,9 +40,9 @@ nav {
   padding: 12px;
   padding-bottom: 20px;
 
-  background-color: azure;
-  border-top: 2px solid turquoise;
-  border-bottom: 2px solid turquoise;
+  background-color: darkseagreen;
+  border-top: 2px solid seagreen;
+  border-bottom: 2px solid seagreen;
   width: 98%;
 }
 
@@ -53,12 +50,18 @@ nav {
 html, body {
 	
   background-color: honeydew;
-  overflow: visible!important;
-  max-height: 100% !important;
+}
+
+html {
+  background-color: none;
+  overflow: hidden;
 }
 
 body {
   margin: 20px;
+  background-color: none;
+  overflow: auto;
+  height: 700px;
 }
 
 
@@ -71,13 +74,13 @@ body {
 
 .info_header {
 	color: green;
-	font-family: Montserrat;
+	font-family: sans-serif;
 	font-size: 20px;
 }
 
 .info_paragraph {
 	color: black;
-	font-family: Montserrat;
+	font-family: sans-serif;
 	font-size: 14px;
 }
 
@@ -116,7 +119,7 @@ button:focus {
 }
 .description p{
 	padding: 8px;
-	font-family: Montserrat;
+	font-family: sans-serif;
 	font-size: 18px;
 	text-align: justify;
 	background-clip: padding-box; /*Add color to padding*/
@@ -179,7 +182,7 @@ button:focus {
 .mini-description p{
 	padding-left: 8px;
 	padding-right: 8px;
-	font-family: Montserrat;
+	font-family: sans-serif;
 	text-align: justify;
 	background-clip: padding-box; /*Add color to padding*/
 }
@@ -206,8 +209,9 @@ button:focus {
 
 /*////////////////////////*/
 #range-wrapper {
-	background-color: seagreen;
+	background-color: black;
   width: 860px;
+  height: 40px;
 	border-radius: 7px;
 	margin: 10px;
 	/*padding: 20px;*/
@@ -298,7 +302,7 @@ button:focus {
   width: 90.25px;
   text-align: center;
   font-weight: bold;
-  font-family: Montserrat;
+  font-family: sans-serif;
   color: white; /* labels grey */
   font-size: 14px;
   cursor: pointer;
@@ -406,7 +410,17 @@ h1 {
   font-family: sans-serif;
   font-weight: bold;
   text-align: left;
+  color: darkgreen;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   margin: 0;
+}
+h4 {
+  margin: 0;
+}
+#myname {
+  text-align: right;
+  margin: 0;
+  color: darkgreen;
 }
 
 .wrapper > section > div {
@@ -423,6 +437,19 @@ nav {
   margin-bottom: 0;
 }
 
+
+#stats {
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#iframe-holder {
+  border: 5px solid turquoise;
+  border-radius: 15px;
+  width: 100%;
+}
 
 
 

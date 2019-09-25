@@ -217,6 +217,8 @@ var getTrackStyle = function (el) {
   return style;
 }
 $(document).ready(function(){
+  $("#iframe-holder").append("<iframe id=\"meandec\" src=\"widgets/meanjun.html\" height=\"600\" width=\"100%\" scrolling=\"no\" seamless=\"seamless\" frameBorder=\"0\" class=\"meanclass\"></iframe>");
+ 
 $rangeInput.on('input', function () {
   sheet.textContent = getTrackStyle(this);
 

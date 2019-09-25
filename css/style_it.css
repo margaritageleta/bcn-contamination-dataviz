@@ -49,19 +49,21 @@ nav {
 
 html, body {
 	
-  background-color: honeydew;
+  /*background-color: honeydew;*/
 }
 
 html {
   background-color: none;
   overflow: hidden;
+  background-color: seagreen
 }
 
 body {
   margin: 20px;
   background-color: none;
   overflow: auto;
-  height: 700px;
+  height: 735px;
+  background-color: honeydew;
 }
 
 
@@ -129,13 +131,17 @@ button:focus {
 
 .list-container { 
 	display: grid;
-	background-color: none; 
-	grid-template-columns: 1fr 1fr 1fr;
+	background-color: darkseagreen; 
+	grid-template-columns: 30% 40% 30%;
 
 	
 }
 .list-container > div {
-	margin: 6px;
+	/*margin: 6px;*/
+  background-color: white;
+  /*border: 2px solid seagreen;*/
+  
+  
 }
 
 .list-container > div > div {
@@ -143,10 +149,26 @@ button:focus {
 	display: flex;
 	align-items: center;
 }
+
+.list-container > div > main {
+  background-color: seagreen;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 20px;
+  color: white;
+  padding-top: 2px;
+  padding-bottom: 2px;
+
+}
+
+.list-container > div > div > p{ 
+  color: #009191;
+}
+
 .list-container span {
 	padding-left: 8px;
 	padding-right: 8px;
-	font-family: Montserrat;
+	font-family: sans-serif;
 	text-align: center;
 	color: #009191;
 }
@@ -162,18 +184,18 @@ button:focus {
 #no2 { 
 	background-color: none; 
 }
-#no2 p { color: #c74040; }
+/*#no2 p { color: #c74040; }*/
 
 #ozone { 
 	background-color: none; 
 }
-#ozone p {
+/*#ozone p {
 	color: green;
-}
+}*/
 #pm10 { 
 	background-color: none; 
 }
-#pm10 p { color: #5c70c2; }
+/*#pm10 p { color: #5c70c2; }*/
 
 .mini-description {
 	display: flex;
@@ -183,6 +205,7 @@ button:focus {
 	padding-left: 8px;
 	padding-right: 8px;
 	font-family: sans-serif;
+  font-size: 17px;
 	text-align: justify;
 	background-clip: padding-box; /*Add color to padding*/
 }
@@ -209,9 +232,9 @@ button:focus {
 
 /*////////////////////////*/
 #range-wrapper {
-	background-color: black;
+	background-color: seagreen;
   width: 860px;
-  height: 40px;
+  height: 35px;
 	border-radius: 7px;
 	margin: 10px;
 	/*padding: 20px;*/
@@ -239,7 +262,7 @@ button:focus {
   height: 18px;
   margin: -8px 0 0;
   border-radius: 0%;
-  background: #009191;
+  background: yellow;
   cursor: pointer;
   border: 0 !important;
 }
@@ -320,7 +343,7 @@ button:focus {
   border-radius: 0%;
 }
 .range-labels .active {
-  color: #009191;
+  color: yellow;
 }
 .range-labels .selected::before {
   background: #b2b2b2;
@@ -418,7 +441,7 @@ h4 {
   margin: 0;
 }
 #myname {
-  text-align: right;
+  text-align: left;
   margin: 0;
   color: darkgreen;
 }
@@ -439,17 +462,22 @@ nav {
 
 
 #stats {
-  background-color: pink;
+  background-color: none;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 #iframe-holder {
-  border: 5px solid turquoise;
-  border-radius: 15px;
+  /*border: 5px solid turquoise;
+  border-radius: 15px;*/
   width: 100%;
 }
+
+#stats2 {
+  background-color: none;
+}
+
 
 
 

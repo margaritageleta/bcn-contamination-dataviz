@@ -138,13 +138,16 @@ $("#dataviz").click(function () {
     $("#about").removeClass("enabled");
     $("#stats2").removeClass("enabled");
 	$("#about").addClass("disabled");
-  $("#info").css('background-color', 'green');
+  $("#info").css('background-color', 'seagreen');
+  $("#info").css('box-shadow', '0 9px darkgreen');
 
   $("#stats2").addClass("disabled");
-  $("#dataviz2").css('background-color', 'green');
+  $("#dataviz2").css('background-color', 'seagreen');
+  $("#dataviz2").css('box-shadow', '0 9px darkgreen');
 
 	$("#stats").addClass("enabled");
-  $(this).css('background-color', 'red');
+  $(this).css('background-color', 'indianred');
+  $(this).css('box-shadow', '0 9px brown');
  });
 
 $("#info").click(function () {
@@ -152,13 +155,16 @@ $("#info").click(function () {
     $("#stats").removeClass("enabled");
     $("#stats2").removeClass("enabled");
 	$("#stats").addClass("disabled");
-  $("#dataviz").css('background-color', 'green');
+  $("#dataviz").css('background-color', 'seagreen');
+  $("#dataviz").css('box-shadow', '0 9px darkgreen');
 
   $("#stats2").addClass("disabled");
-  $("#dataviz2").css('background-color', 'green');
+  $("#dataviz2").css('background-color', 'seagreen');
+  $("#dataviz2").css('box-shadow', '0 9px darkgreen');
 
 	$("#about").addClass("enabled");
-  $(this).css('background-color', 'red');
+  $(this).css('background-color', 'indianred');
+  $(this).css('box-shadow', '0 9px brown');
 
  });
 
@@ -167,13 +173,16 @@ $("#dataviz2").click(function () {
     $("#stats").removeClass("enabled");
     $("#about").removeClass("enabled");
   $("#stats").addClass("disabled");
-  $("#dataviz").css('background-color', 'green');
+  $("#dataviz").css('background-color', 'seagreen');
+  $("#dataviz").css('box-shadow', '0 9px darkgreen');
 
   $("#about").addClass("disabled");
-  $("#info").css('background-color', 'green');
+  $("#info").css('background-color', 'seagreen');
+  $("#info").css('box-shadow', '0 9px darkgreen');
 
   $("#stats2").addClass("enabled");
-  $(this).css('background-color', 'red');
+  $(this).css('background-color', 'indianred');
+  $(this).css('box-shadow', '0 9px brown');
 
  });
 

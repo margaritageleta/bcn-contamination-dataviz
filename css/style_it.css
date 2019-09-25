@@ -11,19 +11,17 @@
 section {
   width: 500px;
   height: 325px;
-  position: absolute;
-   top: 50px;
-   right: 50px;
-   bottom: 0;
-   background-color: rgba(240,255,255, 0.9);
-   border-radius: 7px;
-   border: 2px solid turquoise;
-   z-index: 1000
+  top: 50px;
+  right: 50px;
+  bottom: 0;
+  background-color: rgba(240,255,255, 0.9);
+  border-radius: 7px;
+  border: 2px solid white;
 }
 
 section > div {
-  font-family: Montserrat;
-  font-size: 15px;
+  font-family: sans-serif;
+  font-size: 17px;
   margin: 15px;
   width: 270px;
   height: 270px;
@@ -66,8 +64,8 @@ body {
 
 /* MAP STUFF*/
 #map {
-	height: 400px;
-	width: 40%;
+	height: 100%;
+	width: 60%;
 	border-radius: 7px;
 }
 
@@ -91,7 +89,7 @@ body {
   	display: inline-block;
   	padding: 10px;
   	font-size: 22px;
-  	font-family: Montserrat;
+  	font-family: sans-serif;
   	font-weight: bold;
 	font-variant: small-caps;
   	cursor: pointer;
@@ -99,20 +97,16 @@ body {
   	color: #fff;
   	border: none;
   	border-radius: 7px;
-  	background-color: #66e6cc;
-  	box-shadow: 0 9px #33cccc;
+  	background-color: seagreen;
+  	box-shadow: 0 9px darkgreen;
 }
 button:focus {
     outline: none !important;
 }
-nav {
-	background-color: none;
-	margin-top: 9px;
-	margin-bottom: 18px;
-}
+
 .button:hover { transition-duration: 0.4s; }
 .button:active { 
-	box-shadow: 0 5px #33cccc;
+	box-shadow: 0 5px black;
 	transform: translateY(4px); 
 }
 
@@ -212,7 +206,8 @@ nav {
 
 /*////////////////////////*/
 #range-wrapper {
-	background-color: #66e6cc;
+	background-color: seagreen;
+  width: 860px;
 	border-radius: 7px;
 	margin: 10px;
 	/*padding: 20px;*/
@@ -353,8 +348,9 @@ nav {
 }
  
 .logo-container {
-  width: 470px;
+  width: 100%;
   color: #009191;
+  background-color: none;
 }
 .logo-container > div {
   width: 100%;
@@ -373,12 +369,59 @@ nav {
 
 .info {
   background-color: none;
-  width: 470px;
-  height: 195px;
+  width: 100%;
+  height: 100%;
   color: #009191;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: none;
 
+  height: 350px;
+}
+
+.wrapper > section{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  
+}
+
+.wrapper > section > div > div {
+  width: 100%;
+  background-color: none;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  overflow: auto;
+}
+
+h1 {
+  font-size: 30px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+}
+
+.wrapper > section > div {
+  background-color: none;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 100px;
+}
+
+nav {
+  background-color: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 
 

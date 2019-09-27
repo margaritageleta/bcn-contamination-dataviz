@@ -210,6 +210,7 @@ plotit <- data %>%
   geom_smooth(se=FALSE, color="black", linetype = "dashed", method=lm) +
   #geom_point() + 
   facet_wrap(~ measure, ncol = 3) +
+  scale_colour_manual(values = c("#e41a1c","#377eb8","#4daf4a","#984ea3","#ff7f00","#ffff33","#a65628","#f781bf")) +
   theme_mine())
 
 #method=lm for geom_smooth
@@ -264,7 +265,7 @@ data %>%
 ```{r}
 library(plotly)
 library(htmlwidgets)
-saveWidget(ggplotly(plotit, dynamicTicks = FALSE), file = "meancont.html");
+#saveWidget(ggplotly(plotit, dynamicTicks = FALSE), file = "meancont.html");
 ```
 
 ### Just clean
@@ -359,10 +360,10 @@ mortalitat %>%
 
 ```{r}
 theme_mine <- function () { 
-    theme_bw(base_size=12, base_family="Montserrat") %+replace% 
+    theme_bw(base_size=12, base_family="Helvetica") %+replace% 
         theme(
             panel.background  = element_blank(),
-            plot.background = element_rect(fill="#ebfff5", colour=NA), 
+            plot.background = element_rect(fill="transparent", colour=NA), 
             legend.background = element_rect(fill="transparent", colour=NA),
             legend.key = element_rect(fill="transparent", colour=NA)
         )
@@ -424,6 +425,7 @@ length(names(data_04_2019))
   #geom_point() + 
   scale_x_continuous(limits = c(0, 22)) + 
   facet_wrap(~ sector, nrow = 1) +
+    scale_colour_manual(values = c("#e41a1c","#377eb8","#4daf4a","#984ea3","#ff7f00","#ffff33","#a65628")) +
   theme_mine())
 
   
@@ -513,6 +515,7 @@ summary(data19)
   #geom_point() + 
   scale_x_continuous(breaks = c(4,6)) +
   facet_wrap(~ measure, ncol = 7) +
+   scale_colour_manual(values = c("#e41a1c","#377eb8","#4daf4a","#984ea3","#ff7f00","#ffff33","#a65628")) +
   theme_mine())
 
 #method=lm for geom_smooth

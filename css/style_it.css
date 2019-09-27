@@ -40,7 +40,7 @@ nav {
   padding: 12px;
   padding-bottom: 20px;
 
-  background-color: darkseagreen;
+  background-color: white;
   border-top: 2px solid seagreen;
   border-bottom: 2px solid seagreen;
   width: 98%;
@@ -343,7 +343,7 @@ button:focus {
   border-radius: 0%;
 }
 .range-labels .active {
-  color: yellow;
+  color: indianred;
 }
 .range-labels .selected::before {
   background: #b2b2b2;

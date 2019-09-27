@@ -44,6 +44,8 @@ nav {
   border-top: 2px solid seagreen;
   border-bottom: 2px solid seagreen;
   width: 98%;
+
+  z-index: 1000;
 }
 
 
@@ -63,7 +65,7 @@ body {
   background-color: none;
   overflow: auto;
   height: 735px;
-  background-color: honeydew;
+  background-color: white;
 }
 
 
@@ -126,6 +128,8 @@ button:focus {
 	text-align: justify;
 	background-clip: padding-box; /*Add color to padding*/
 	color: #009191;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 
@@ -343,10 +347,10 @@ button:focus {
   border-radius: 0%;
 }
 .range-labels .active {
-  color: indianred;
+  color: yellow;
 }
 .range-labels .selected::before {
-  background: #b2b2b2;
+  background: white;
 }
 .range-labels .active.selected::before {
   display: none;
